@@ -304,6 +304,7 @@
             this.button10.TabStop = false;
             this.button10.Text = "←";
             this.button10.UseVisualStyleBackColor = false;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // buttonCE
             // 
@@ -353,6 +354,7 @@
             this.buttonraiz.TabStop = false;
             this.buttonraiz.Text = "√";
             this.buttonraiz.UseVisualStyleBackColor = false;
+            this.buttonraiz.Click += new System.EventHandler(this.buttonraiz_Click);
             // 
             // buttonmc
             // 
@@ -434,6 +436,7 @@
             this.tResultado.Size = new System.Drawing.Size(201, 25);
             this.tResultado.TabIndex = 29;
             this.tResultado.TabStop = false;
+            this.tResultado.Text = "0";
             this.tResultado.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // Prueba

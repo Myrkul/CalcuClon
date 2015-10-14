@@ -12,7 +12,7 @@ namespace WindowsFormsApplication1
 {
     public partial class Prueba : Form
     {
-        int contadorCifras = 1;
+        int contadorCifras = 0;
         Double [] operandos = new Double[2] {0,0};
         Double resultado1 = 0;
         char operacion;
@@ -20,15 +20,23 @@ namespace WindowsFormsApplication1
         String buffer = "";
         bool primeraOperacion = true;
         bool encadenado = false;
-
+        bool nuevoNumero = true;
 
         public Prueba()
         {
             InitializeComponent();
         }
 
+
         private void introducirNumero(Double numero)
         {
+            if(numero == 0d && tResultado.Text == "0")
+                return;
+            if (nuevoNumero == true)
+            {
+                tResultado.Clear();
+                nuevoNumero = false;
+            }
             if (contadorCifras < 16)
             {
                 tResultado.Text += numero.ToString();
@@ -48,6 +56,7 @@ namespace WindowsFormsApplication1
             operacion = signo;
             buffer = "";
             contadorCifras = 0;
+            nuevoNumero = true;
             if (encadenado == false)
             {
                 tick = 1;
@@ -58,7 +67,7 @@ namespace WindowsFormsApplication1
             else
             {
                 operar();
-                mostrar();
+                tResultado.Text = resultado1.ToString();
                 primeraOperacion = false;
             }
         }
@@ -149,53 +158,24 @@ namespace WindowsFormsApplication1
         }
         private void button0_Click(object sender, EventArgs e)
         {
-            introducirNumero(0);
+            if(tResultado.Text != "0")
+                introducirNumero(0);
         }
         private void buttonmas_Click(object sender, EventArgs e)
         {
             introducirSigno('+');
-            
-        /*    introducirSigno('+');
-            operar();
-            primeraOperacion = false;
-            if (operandos[1] != 0)
-            {
-                mostrar();
-                tHistorial.Text += '+';
-            }*/
         }
         private void buttonmenos_Click(object sender, EventArgs e)
         {
             introducirSigno('-');
-            operar();
-            primeraOperacion = false;
-            if (operandos[1] != 0)
-            {
-                mostrar();
-                tHistorial.Text += '-';
-            }
         }
         private void buttonpor_Click(object sender, EventArgs e)
         {
             introducirSigno('*');
-            operar();
-            primeraOperacion = false;
-            if (operandos[1] != 0)
-            {
-                mostrar();
-                tHistorial.Text += '*';
-            }
         }
         private void buttonentre_Click(object sender, EventArgs e)
         {
             introducirSigno('/');
-            operar();
-            primeraOperacion = false;
-            if (operandos[1] != 0)
-            {
-                mostrar();
-                tHistorial.Text += '/';
-            }
         }
 
         private void buttonC_Click(object sender, EventArgs e)
@@ -203,7 +183,12 @@ namespace WindowsFormsApplication1
             operandos[0] = 0;
             operandos[1] = 0;
             tHistorial.Text = "";
-            tResultado.Text = "";
+            tResultado.Text = "0";
+            contadorCifras = 0;
+            resultado1 = 0;
+            tick = 0;
+            primeraOperacion = true;
+            encadenado = false;
         }
         private void Prueba_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -243,6 +228,28 @@ namespace WindowsFormsApplication1
         private void buttoncomma_Click(object sender, EventArgs e)
         {
             introducirComa();
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                buffer = buffer.Substring(0, buffer.Length - 1);
+            }
+            catch
+            {
+                return;
+            }
+            tResultado.Text = tResultado.Text.Substring(0, tResultado.Text.Length - 1);
+            parseNum();
+            contadorCifras--;
+        }
+
+        private void buttonraiz_Click(object sender, EventArgs e)
+        {
+            tHistorial.Text += "sqrt(" + operandos[tick] + ")";
+            operandos[tick] = Math.Sqrt(operandos[tick]);
+            tResultado.Text = operandos[tick].ToString();
         }
     }
 }
