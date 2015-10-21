@@ -17,7 +17,7 @@ namespace WindowsFormsApplication1
         Double resultado1 = 0, memoria = 0;
         char operacion;
         String buffer = "";
-        bool primeraOperacion = true, encadenado = false, nuevoNumero = true, especial = false;
+        bool primeraOperacion = true, encadenado = false, nuevoNumero = true, especial = false, operacionErronea = false;
 
         public Prueba()
         {
@@ -94,6 +94,8 @@ namespace WindowsFormsApplication1
 
         private void igual()
         {
+            if (operacionErronea == true)
+                return;
             if (tick == 1)
             {
                 operar();
@@ -104,24 +106,10 @@ namespace WindowsFormsApplication1
                 tick = 0;
             }
         }
-        private void borrarTodo(object sender, EventArgs e)
-        {
-            operandos[0] = 0;
-            operandos[1] = 0;
-            tHistorial.Text = "";
-            tResultado.Text = "0";
-            contadorCifras = 0;
-            resultado1 = 0;
-            tick = 0;
-            buffer = "";
-            operacion = ' ';
-            primeraOperacion = true;
-            encadenado = false;
-            buttonigual.Focus();
-        }
-
         private void teclado(String entrada)
         {
+            if (operacionErronea == true)
+                return;
             try
             {
                 introducirNumero(Double.Parse(entrada));
@@ -136,100 +124,155 @@ namespace WindowsFormsApplication1
                     buffer += ",";
                     tResultado.Text += ",";
                 }
-                else
+                else if (entrada == "+" || entrada == "-" || entrada == "*" || entrada == "*")
                     introducirSigno(op);
+                else
+                    introducirOperacionEspecial(entrada);   
             }
+        }
+        private void introducirOperacionEspecial(String entrada)
+        {
+            if (operacionErronea == true)
+                return;
+            if (entrada == "√")
+                raiz();
+            else if (entrada == "%")
+                porcentaje();
+            else if (entrada == "1/x")
+                inverso();
+            else if (entrada == "±")
+                cambioSigno();
+            else if (entrada == "C")
+                borrarTodo();
+            else if (entrada == "CE")
+                borrarValor();
+            else if (entrada == "M+")
+                memoriaMas();
+            else if (entrada == "M-")
+                memoriaMenos();
+            else if (entrada == "MR")
+                memoriaRestaurar();
+            else if (entrada == "MS")
+                memoriaGuardar();
+            else if (entrada == "MC")
+                memoriaGuardar();
+            buttonigual.Focus();
+        }
+        private void borrarTodo()
+        {
+            operandos[0] = 0;
+            operandos[1] = 0;
+            tHistorial.Text = "";
+            tResultado.Text = "0";
+            contadorCifras = 0;
+            resultado1 = 0;
+            tick = 0;
+            buffer = "";
+            operacion = ' ';
+            primeraOperacion = true;
+            encadenado = false;
+            buttonigual.Focus();
         }
         private void pulsacionRaton(object sender, EventArgs e)
         {
+            if (operacionErronea == true)
+                return;
             Button boton = (Button) sender;
             teclado(boton.Text);
             buttonigual.Focus();
         }
         private void pulsacionTeclado(object sender, KeyPressEventArgs e)
         {
+            if (operacionErronea == true)
+                return;
             teclado(e.KeyChar.ToString());
         }
 
-        private void borrarAnterior(object sender, EventArgs e)
+        private void borrarAnterior()
         {
-            try
-            {
-                buffer = buffer.Substring(0, buffer.Length - 1);
-            }
-            catch
-            {
+            if (operacionErronea == true)
                 return;
+            if (buffer.Length > 1)
+            {
+                try
+                {
+                    buffer = buffer.Substring(0, buffer.Length - 1);
+                }
+                catch
+                {
+                    return;
+                }
+                tResultado.Text = tResultado.Text.Substring(0, tResultado.Text.Length - 1);
+                operandos[tick] = Double.Parse(buffer);
+                contadorCifras--;
+                buttonigual.Focus();
             }
-            tResultado.Text = tResultado.Text.Substring(0, tResultado.Text.Length - 1);
-            operandos[tick] = Double.Parse(buffer);
-            contadorCifras--;
-            buttonigual.Focus();
+            else
+            {
+                buffer = "0";
+                tResultado.Text = "0";
+                operandos[tick] = Double.Parse(buffer);
+                buttonigual.Focus();
+            }
         }
-        private void inverso(object sender, EventArgs e)
+        private void inverso()
         {
+            especial = true;
             tHistorial.Text += "reciproc(" + operandos[tick] + ")";
             operandos[tick] = 1 / operandos[tick];
             tResultado.Text = operandos[tick].ToString();
-            buttonigual.Focus();
-            especial = true;
         }
-        private void cambioSigno(object sender, EventArgs e)
+        private void cambioSigno()
         {
+            especial = true;
             operandos[tick] = -operandos[tick];
             tResultado.Text = operandos[tick].ToString();
-            buttonigual.Focus();
         }
-        private void borrarValor(object sender, EventArgs e)
+        private void borrarValor()
         {
             operandos[tick] = 0;
             tResultado.Text = "0";
-            buttonigual.Focus();
         }
-        private void memoriaMas(object sender, EventArgs e)
+        private void memoriaMas()
         {
             checkMemoria.Checked = true;
             memoria += operandos[tick];
-            buttonigual.Focus();
         }
-        private void memoriaMenos(object sender, EventArgs e)
+        private void memoriaMenos()
         {
             checkMemoria.Checked = true;
             memoria -= operandos[tick];
-            buttonigual.Focus();
         }
-        private void memoriaBorrar(object sender, EventArgs e)
+        private void memoriaBorrar()
         {
             checkMemoria.Checked = false;
             memoria = 0;
-            buttonigual.Focus();
         }
-        private void memoriaRestaurar(object sender, EventArgs e)
+        private void memoriaRestaurar()
         {
             operandos[tick] = memoria;
             tResultado.Text = operandos[tick].ToString();
-            buttonigual.Focus();
         }
-        private void memoriaGuardar(object sender, EventArgs e)
+        private void memoriaGuardar()
         {
             checkMemoria.Checked = true;
             memoria = operandos[tick];
-            buttonigual.Focus();
         }
-        private void raiz(object sender, EventArgs e)
+        private void raiz()
         {
+            especial = true;
             tHistorial.Text += "sqrt(" + operandos[tick] + ")";
             operandos[tick] = Math.Sqrt(operandos[tick]);
             tResultado.Text = operandos[tick].ToString();
-            buttonigual.Focus();
-            especial = true;
         }
-        private void porcentaje(object sender, EventArgs e)
+        private void porcentaje()
         {
-            operandos[1] = operandos[0] / 100 * operandos[1];
-            tResultado.Text = operandos[1].ToString();
-            buttonigual.Focus();
-            especial = true;
+            if (tick == 1)
+            {
+                especial = true;
+                operandos[1] = operandos[0] / 100 * operandos[1];
+                tResultado.Text = operandos[1].ToString();
+            }
         }
     }
 }

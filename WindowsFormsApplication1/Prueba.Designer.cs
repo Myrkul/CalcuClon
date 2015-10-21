@@ -315,7 +315,7 @@
             this.buttoninverso.TabStop = false;
             this.buttoninverso.Text = "1/x";
             this.buttoninverso.UseVisualStyleBackColor = true;
-            this.buttoninverso.Click += new System.EventHandler(this.inverso);
+            this.buttoninverso.Click += new System.EventHandler(this.pulsacionRaton);
             // 
             // buttonporcentaje
             // 
@@ -330,7 +330,7 @@
             this.buttonporcentaje.TabStop = false;
             this.buttonporcentaje.Text = "%";
             this.buttonporcentaje.UseVisualStyleBackColor = true;
-            this.buttonporcentaje.Click += new System.EventHandler(this.porcentaje);
+            this.buttonporcentaje.Click += new System.EventHandler(this.pulsacionRaton);
             // 
             // button10
             // 
@@ -345,7 +345,7 @@
             this.button10.TabStop = false;
             this.button10.Text = "←";
             this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.borrarAnterior);
+            this.button10.Click += new System.EventHandler(this.pulsacionRaton);
             // 
             // buttonCE
             // 
@@ -360,7 +360,7 @@
             this.buttonCE.TabStop = false;
             this.buttonCE.Text = "CE";
             this.buttonCE.UseVisualStyleBackColor = true;
-            this.buttonCE.Click += new System.EventHandler(this.borrarValor);
+            this.buttonCE.Click += new System.EventHandler(this.pulsacionRaton);
             // 
             // buttonC
             // 
@@ -375,7 +375,7 @@
             this.buttonC.TabStop = false;
             this.buttonC.Text = "C";
             this.buttonC.UseVisualStyleBackColor = true;
-            this.buttonC.Click += new System.EventHandler(this.borrarTodo);
+            this.buttonC.Click += new System.EventHandler(this.pulsacionRaton);
             // 
             // buttonmasmenos
             // 
@@ -390,7 +390,7 @@
             this.buttonmasmenos.TabStop = false;
             this.buttonmasmenos.Text = "±";
             this.buttonmasmenos.UseVisualStyleBackColor = true;
-            this.buttonmasmenos.Click += new System.EventHandler(this.cambioSigno);
+            this.buttonmasmenos.Click += new System.EventHandler(this.pulsacionRaton);
             // 
             // buttonraiz
             // 
@@ -405,7 +405,7 @@
             this.buttonraiz.TabStop = false;
             this.buttonraiz.Text = "√";
             this.buttonraiz.UseVisualStyleBackColor = true;
-            this.buttonraiz.Click += new System.EventHandler(this.raiz);
+            this.buttonraiz.Click += new System.EventHandler(this.pulsacionRaton);
             // 
             // buttonmc
             // 
@@ -420,7 +420,7 @@
             this.buttonmc.TabStop = false;
             this.buttonmc.Text = "MC";
             this.buttonmc.UseVisualStyleBackColor = true;
-            this.buttonmc.Click += new System.EventHandler(this.memoriaBorrar);
+            this.buttonmc.Click += new System.EventHandler(this.pulsacionRaton);
             // 
             // buttonms
             // 
@@ -435,7 +435,7 @@
             this.buttonms.TabStop = false;
             this.buttonms.Text = "MS";
             this.buttonms.UseVisualStyleBackColor = true;
-            this.buttonms.Click += new System.EventHandler(this.memoriaGuardar);
+            this.buttonms.Click += new System.EventHandler(this.pulsacionRaton);
             // 
             // buttonmr
             // 
@@ -450,7 +450,7 @@
             this.buttonmr.TabStop = false;
             this.buttonmr.Text = "MR";
             this.buttonmr.UseVisualStyleBackColor = true;
-            this.buttonmr.Click += new System.EventHandler(this.memoriaRestaurar);
+            this.buttonmr.Click += new System.EventHandler(this.pulsacionRaton);
             // 
             // buttonmmas
             // 
@@ -465,7 +465,7 @@
             this.buttonmmas.TabStop = false;
             this.buttonmmas.Text = "M+";
             this.buttonmmas.UseVisualStyleBackColor = true;
-            this.buttonmmas.Click += new System.EventHandler(this.memoriaMas);
+            this.buttonmmas.Click += new System.EventHandler(this.pulsacionRaton);
             // 
             // buttonmmenos
             // 
@@ -480,7 +480,7 @@
             this.buttonmmenos.TabStop = false;
             this.buttonmmenos.Text = "M-";
             this.buttonmmenos.UseVisualStyleBackColor = true;
-            this.buttonmmenos.Click += new System.EventHandler(this.memoriaMenos);
+            this.buttonmmenos.Click += new System.EventHandler(this.pulsacionRaton);
             // 
             // tHistorial
             // 
