@@ -17,7 +17,7 @@ namespace WindowsFormsApplication1
         Double resultado1 = 0, memoria = 0;
         char operacion;
         String buffer = "";
-        bool primeraOperacion = true, encadenado = false, nuevoNumero = true;
+        bool primeraOperacion = true, encadenado = false, nuevoNumero = true, especial = false;
 
         public Prueba()
         {
@@ -35,6 +35,8 @@ namespace WindowsFormsApplication1
             }
             if (contadorCifras < 16)
             {
+                if (tResultado.Text == "0")
+                    tResultado.Text = "";
                 tResultado.Text += numero.ToString();
                 buffer += numero;
                 operandos[tick] = Double.Parse(buffer);
@@ -44,7 +46,16 @@ namespace WindowsFormsApplication1
 
         private void introducirSigno(char signo)
         {
-            tHistorial.Text += operandos[0].ToString() + " " + signo + " ";
+            if (especial == false)
+            {
+                if (encadenado == false)
+                    tHistorial.Text = operandos[0].ToString();
+                else
+                 tHistorial.Text += buffer;
+            }
+            else
+                especial = false;
+            tHistorial.Text += " " + signo + " ";
             buffer = "";
             contadorCifras = 0;
             nuevoNumero = true;
@@ -102,8 +113,11 @@ namespace WindowsFormsApplication1
             contadorCifras = 0;
             resultado1 = 0;
             tick = 0;
+            buffer = "";
+            operacion = ' ';
             primeraOperacion = true;
             encadenado = false;
+            buttonigual.Focus();
         }
 
         private void teclado(String entrada)
@@ -130,7 +144,7 @@ namespace WindowsFormsApplication1
         {
             Button boton = (Button) sender;
             teclado(boton.Text);
-            this.Focus();
+            buttonigual.Focus();
         }
         private void pulsacionTeclado(object sender, KeyPressEventArgs e)
         {
@@ -150,58 +164,72 @@ namespace WindowsFormsApplication1
             tResultado.Text = tResultado.Text.Substring(0, tResultado.Text.Length - 1);
             operandos[tick] = Double.Parse(buffer);
             contadorCifras--;
+            buttonigual.Focus();
         }
         private void inverso(object sender, EventArgs e)
         {
             tHistorial.Text += "reciproc(" + operandos[tick] + ")";
             operandos[tick] = 1 / operandos[tick];
             tResultado.Text = operandos[tick].ToString();
+            buttonigual.Focus();
+            especial = true;
         }
         private void cambioSigno(object sender, EventArgs e)
         {
             operandos[tick] = -operandos[tick];
             tResultado.Text = operandos[tick].ToString();
+            buttonigual.Focus();
         }
         private void borrarValor(object sender, EventArgs e)
         {
             operandos[tick] = 0;
             tResultado.Text = "0";
+            buttonigual.Focus();
         }
         private void memoriaMas(object sender, EventArgs e)
         {
             checkMemoria.Checked = true;
             memoria += operandos[tick];
+            buttonigual.Focus();
         }
         private void memoriaMenos(object sender, EventArgs e)
         {
             checkMemoria.Checked = true;
             memoria -= operandos[tick];
+            buttonigual.Focus();
         }
         private void memoriaBorrar(object sender, EventArgs e)
         {
             checkMemoria.Checked = false;
             memoria = 0;
+            buttonigual.Focus();
         }
         private void memoriaRestaurar(object sender, EventArgs e)
         {
             operandos[tick] = memoria;
             tResultado.Text = operandos[tick].ToString();
+            buttonigual.Focus();
         }
         private void memoriaGuardar(object sender, EventArgs e)
         {
             checkMemoria.Checked = true;
             memoria = operandos[tick];
+            buttonigual.Focus();
         }
         private void raiz(object sender, EventArgs e)
         {
             tHistorial.Text += "sqrt(" + operandos[tick] + ")";
             operandos[tick] = Math.Sqrt(operandos[tick]);
             tResultado.Text = operandos[tick].ToString();
+            buttonigual.Focus();
+            especial = true;
         }
         private void porcentaje(object sender, EventArgs e)
         {
             operandos[1] = operandos[0] / 100 * operandos[1];
             tResultado.Text = operandos[1].ToString();
+            buttonigual.Focus();
+            especial = true;
         }
     }
 }
