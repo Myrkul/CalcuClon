@@ -8,23 +8,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApplication1
+namespace Calculadora
 {
-    public partial class Prueba : Form
+    public partial class Calculadora : Form
     {
+        #region Variables
         int contadorCifras = 0, tick = 0, modo = 0;
         Double [] operandos = new Double[2] {0,0};
         Double resultado1 = 0, memoria = 0;
         char operacion;
         String buffer = "";
         bool primeraOperacion = true, encadenado = false, nuevoNumero = true, especial = false, operacionErronea = false, signoPulsado = false, coma = false;
+        #endregion
 
-        public Prueba()
+        public Calculadora()
         {
             InitializeComponent();
             cambiarModo(0);
         }
 
+        #region Calculadora Básica
+        #region Introducir datos / Operar
         private void introducirNumero(Double numero)
         {
             signoPulsado = false;
@@ -49,38 +53,47 @@ namespace WindowsFormsApplication1
 
         private void introducirSigno(char signo)
         {
-            if (especial == false)
+            if (!signoPulsado)
             {
-                if (encadenado == false)
-                    tHistorial.Text = operandos[0].ToString();
+                if (!especial)
+                {
+                    if (!encadenado)
+                    {
+                        if (radioBin.Checked)
+                            tHistorial.Text = operandos[0].ToString("################");
+                        else
+                            tHistorial.Text = operandos[0].ToString();
+                    }
+                    else
+                        tHistorial.Text += buffer;
+                }
                 else
-                 tHistorial.Text += buffer;
+                    especial = false;
+                tHistorial.Text += " " + signo + " ";
+                buffer = "";
+                contadorCifras = 0;
+                nuevoNumero = true;
+                if (encadenado == false)
+                {
+                    tick = 1;
+                    encadenado = true;
+                    primeraOperacion = false;
+                    tResultado.Clear();
+                }
+                else
+                {
+                    operar();
+                    tResultado.Text = resultado1.ToString();
+                    primeraOperacion = false;
+                }
             }
             else
-                especial = false;
-            tHistorial.Text += " " + signo + " ";
-            buffer = "";
-            contadorCifras = 0;
-            nuevoNumero = true;
-            if (encadenado == false)
-            {
-                tick = 1;
-                encadenado = true;
-                primeraOperacion = false;
-                tResultado.Clear();
-            }
-            else
-            {
-                operar();
-                tResultado.Text = resultado1.ToString();
-                primeraOperacion = false;
-            }
+                tHistorial.Text = operandos[0].ToString() + " " + signo.ToString() + " ";
             operacion = signo;
         }
-
         private void operar()
         {
-            if(radioBin.Checked)
+            if (radioBin.Checked)
             {
                 operandos[0] = Convert.ToInt64(operandos[0].ToString(), 2);
                 operandos[1] = Convert.ToInt64(operandos[1].ToString(), 2);
@@ -95,7 +108,7 @@ namespace WindowsFormsApplication1
                     resultado1 = operandos[0] * operandos[1];
                 else if (operacion == '/')
                     resultado1 = operandos[0] / operandos[1];
-                if(radioBin.Checked)
+                if (radioBin.Checked)
                 {
                     resultado1 = Double.Parse(Convert.ToString((long)resultado1, 2));
                 }
@@ -103,24 +116,8 @@ namespace WindowsFormsApplication1
             }
             tick = 1;
         }
-
-        private void igual()
-        {
-            if (operacionErronea == true)
-                return;
-            if (tick == 1)
-            {
-                operar();
-                tResultado.Text = resultado1.ToString();
-                tHistorial.Clear();
-                encadenado = false;
-                operandos[1] = 0;
-                tick = 0;
-                buffer = "";
-                nuevoNumero = true;
-                especial = false;
-            }
-        }
+        #endregion
+        #region Teclado / Clicks
         private void teclado(String entrada)
         {
             if (operacionErronea == true)
@@ -147,16 +144,51 @@ namespace WindowsFormsApplication1
                 else if (op == '/' || op == '*' || op == '-' || op == '+')
                 {
                     coma = false;
-                    if (signoPulsado == true)
-                        return;
-                    signoPulsado = true;
                     introducirSigno(op);
+                    signoPulsado = true;
                 }
                 else
                     return;
             }
             if (modo == 2)
                 calcularBinario();
+        }
+        private void pulsacionRaton(object sender, EventArgs e)
+        {
+            if (operacionErronea == true)
+                return;
+            Button boton = (Button) sender;
+            teclado(boton.Text);
+            buttonigual.Focus();
+        }
+        private void pulsacionTeclado(object sender, KeyPressEventArgs e)
+        {
+            if (operacionErronea == true)
+                return;
+            teclado(e.KeyChar.ToString());
+            buttonigual.Focus();
+        }
+        #endregion
+        #region Botones especiales
+        private void igual()
+        {
+            if (operacionErronea == true)
+                return;
+            if (tick == 1)
+            {
+                operar();
+                if(radioBin.Checked)
+                    tResultado.Text = resultado1.ToString("################");
+                else
+                    tResultado.Text = resultado1.ToString();
+                tHistorial.Clear();
+                encadenado = false;
+                operandos[1] = 0;
+                tick = 0;
+                buffer = "";
+                nuevoNumero = true;
+                especial = false;
+            }
         }
         private void borrarTodo(object sender, EventArgs e)
         {
@@ -174,24 +206,10 @@ namespace WindowsFormsApplication1
             operacionErronea = false;
             especial = false;
             coma = false;
+            if (modo == 2)
+                calcularBinario();
             buttonigual.Focus();
         }
-        private void pulsacionRaton(object sender, EventArgs e)
-        {
-            if (operacionErronea == true)
-                return;
-            Button boton = (Button) sender;
-            teclado(boton.Text);
-            buttonigual.Focus();
-        }
-        private void pulsacionTeclado(object sender, KeyPressEventArgs e)
-        {
-            if (operacionErronea == true)
-                return;
-            teclado(e.KeyChar.ToString());
-            buttonigual.Focus();
-        }
-
         private void borrarAnterior(object sender, EventArgs e)
         {
             if (operacionErronea == true)
@@ -243,6 +261,8 @@ namespace WindowsFormsApplication1
             operandos[tick] = 0;
             tResultado.Text = "0";
             contadorCifras = 0;
+            if (modo == 2)
+                calcularBinario();
             buttonigual.Focus();
         }
         private void memoriaMas(object sender, EventArgs e)
@@ -267,6 +287,8 @@ namespace WindowsFormsApplication1
         {
             operandos[tick] = memoria;
             tResultado.Text = operandos[tick].ToString();
+            if (modo == 2)
+                calcularBinario();
             buttonigual.Focus();
         }
         private void memoriaGuardar(object sender, EventArgs e)
@@ -303,6 +325,11 @@ namespace WindowsFormsApplication1
             }
             buttonigual.Focus();
         }
+        #endregion
+
+        #endregion
+
+        #region Calculadora Avanzada
         private void cambiarModo(int mod)
         {
             Size tam;
@@ -485,5 +512,6 @@ namespace WindowsFormsApplication1
                 textBox1.Text = qword;
             }
         }
+        #endregion
     }
 }
