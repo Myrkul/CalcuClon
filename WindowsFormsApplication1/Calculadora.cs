@@ -244,6 +244,8 @@ namespace Calculadora
         }
         private void inverso(object sender, EventArgs e)
         {
+            if (especial)
+                tHistorial.Text = "";
             especial = true;
             tHistorial.Text += "reciproc(" + operandos[tick] + ")";
             operandos[tick] = 1 / operandos[tick];
@@ -300,6 +302,8 @@ namespace Calculadora
         }
         private void raiz(object sender, EventArgs e)
         {
+            if (especial)
+                tHistorial.Text = "";
             especial = true;
             tHistorial.Text += "sqrt(" + operandos[tick] + ")";
             if(operandos[tick] >= 0)
