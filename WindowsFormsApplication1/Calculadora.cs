@@ -138,7 +138,7 @@ namespace Calculadora
                     coma = true;
                     nuevoNumero = false;
                     buffer += ",";
-                    tResultado.Text = buffer;
+                    tResultado.Text = Convert.ToDouble(buffer).ToString() + ",";
                 }
                 else if (op == '/' || op == '*' || op == '-' || op == '+')
                 {
@@ -203,7 +203,7 @@ namespace Calculadora
             contadorCifras = 0;
             resultado1 = 0;
             tick = 0;
-            buffer = "";
+            buffer = "0";
             operacion = ' ';
             primeraOperacion = true;
             encadenado = false;
@@ -275,12 +275,14 @@ namespace Calculadora
         {
             checkMemoria.Checked = true;
             memoria += operandos[tick];
+            nuevoNumero = true;
             buttonigual.Focus();
         }
         private void memoriaMenos(object sender, EventArgs e)
         {
             checkMemoria.Checked = true;
             memoria -= operandos[tick];
+            nuevoNumero = true;
             buttonigual.Focus();
         }
         private void memoriaBorrar(object sender, EventArgs e)
