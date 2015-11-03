@@ -74,6 +74,12 @@
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelBasico = new System.Windows.Forms.Panel();
             this.panelBinario = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -108,12 +114,6 @@
             this.radioBin = new System.Windows.Forms.RadioButton();
             this.radioDec = new System.Windows.Forms.RadioButton();
             this.radioOct = new System.Windows.Forms.RadioButton();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panelBasico.SuspendLayout();
             this.panelBinario.SuspendLayout();
@@ -406,7 +406,7 @@
             this.button10.TabStop = false;
             this.button10.Text = "←";
             this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.borrarAnterior);
+            this.button10.Click += new System.EventHandler(this.pulsacionRaton);
             // 
             // buttonCE
             // 
@@ -598,13 +598,13 @@
             this.programadorToolStripMenuItem1,
             this.estadísticasToolStripMenuItem});
             this.verToolStripMenuItem.Name = "verToolStripMenuItem";
-            this.verToolStripMenuItem.Size = new System.Drawing.Size(36, 20);
+            this.verToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.verToolStripMenuItem.Text = "Ver";
             // 
             // estándarToolStripMenuItem
             // 
             this.estándarToolStripMenuItem.Name = "estándarToolStripMenuItem";
-            this.estándarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.estándarToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.estándarToolStripMenuItem.Text = "Estándar";
             this.estándarToolStripMenuItem.Click += new System.EventHandler(this.estándarToolStripMenuItem_Click);
             // 
@@ -612,13 +612,13 @@
             // 
             this.programadorToolStripMenuItem.Enabled = false;
             this.programadorToolStripMenuItem.Name = "programadorToolStripMenuItem";
-            this.programadorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.programadorToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.programadorToolStripMenuItem.Text = "Científica";
             // 
             // programadorToolStripMenuItem1
             // 
             this.programadorToolStripMenuItem1.Name = "programadorToolStripMenuItem1";
-            this.programadorToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.programadorToolStripMenuItem1.Size = new System.Drawing.Size(144, 22);
             this.programadorToolStripMenuItem1.Text = "Programador";
             this.programadorToolStripMenuItem1.Click += new System.EventHandler(this.programadorToolStripMenuItem1_Click);
             // 
@@ -626,7 +626,7 @@
             // 
             this.estadísticasToolStripMenuItem.Enabled = false;
             this.estadísticasToolStripMenuItem.Name = "estadísticasToolStripMenuItem";
-            this.estadísticasToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.estadísticasToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.estadísticasToolStripMenuItem.Text = "Estadísticas";
             // 
             // ediciónToolStripMenuItem
@@ -643,19 +643,19 @@
             // copiadToolStripMenuItem
             // 
             this.copiadToolStripMenuItem.Name = "copiadToolStripMenuItem";
-            this.copiadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.copiadToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.copiadToolStripMenuItem.Text = "Copiar";
             // 
             // pegarToolStripMenuItem
             // 
             this.pegarToolStripMenuItem.Name = "pegarToolStripMenuItem";
-            this.pegarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pegarToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.pegarToolStripMenuItem.Text = "Pegar";
             // 
             // historialToolStripMenuItem
             // 
             this.historialToolStripMenuItem.Name = "historialToolStripMenuItem";
-            this.historialToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.historialToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.historialToolStripMenuItem.Text = "Historial";
             // 
             // ayudaToolStripMenuItem
@@ -725,6 +725,66 @@
             this.panelBinario.Name = "panelBinario";
             this.panelBinario.Size = new System.Drawing.Size(434, 61);
             this.panelBinario.TabIndex = 33;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(413, 16);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(15, 12);
+            this.label4.TabIndex = 32;
+            this.label4.Text = "32";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(5, 49);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(15, 12);
+            this.label5.TabIndex = 33;
+            this.label5.Text = "31";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(229, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(15, 12);
+            this.label2.TabIndex = 31;
+            this.label2.Text = "47";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(229, 49);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(15, 12);
+            this.label6.TabIndex = 34;
+            this.label6.Text = "15";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(5, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(15, 12);
+            this.label1.TabIndex = 30;
+            this.label1.Text = "63";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(419, 49);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(10, 12);
+            this.label7.TabIndex = 35;
+            this.label7.Text = "0";
             // 
             // textBox4
             // 
@@ -801,9 +861,10 @@
             // buttonNot
             // 
             this.buttonNot.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.buttonNot.Enabled = false;
             this.buttonNot.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow;
             this.buttonNot.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonNot.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonNot.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonNot.Location = new System.Drawing.Point(93, 202);
             this.buttonNot.Name = "buttonNot";
             this.buttonNot.Size = new System.Drawing.Size(35, 30);
@@ -814,9 +875,10 @@
             // buttonRsh
             // 
             this.buttonRsh.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.buttonRsh.Enabled = false;
             this.buttonRsh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow;
             this.buttonRsh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonRsh.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonRsh.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonRsh.Location = new System.Drawing.Point(93, 166);
             this.buttonRsh.Name = "buttonRsh";
             this.buttonRsh.Size = new System.Drawing.Size(35, 30);
@@ -827,9 +889,10 @@
             // buttonOr
             // 
             this.buttonOr.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.buttonOr.Enabled = false;
             this.buttonOr.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow;
             this.buttonOr.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonOr.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonOr.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonOr.Location = new System.Drawing.Point(93, 130);
             this.buttonOr.Name = "buttonOr";
             this.buttonOr.Size = new System.Drawing.Size(35, 30);
@@ -849,13 +912,15 @@
             this.buttonRol.TabIndex = 20;
             this.buttonRol.Text = "RoL";
             this.buttonRol.UseVisualStyleBackColor = false;
+            this.buttonRol.Click += new System.EventHandler(this.buttonRol_Click);
             // 
             // buttonPar2
             // 
             this.buttonPar2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.buttonPar2.Enabled = false;
             this.buttonPar2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow;
             this.buttonPar2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonPar2.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonPar2.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonPar2.Location = new System.Drawing.Point(93, 58);
             this.buttonPar2.Name = "buttonPar2";
             this.buttonPar2.Size = new System.Drawing.Size(35, 30);
@@ -879,9 +944,10 @@
             // buttonAnd
             // 
             this.buttonAnd.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.buttonAnd.Enabled = false;
             this.buttonAnd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow;
             this.buttonAnd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonAnd.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonAnd.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAnd.Location = new System.Drawing.Point(51, 202);
             this.buttonAnd.Name = "buttonAnd";
             this.buttonAnd.Size = new System.Drawing.Size(35, 30);
@@ -892,9 +958,10 @@
             // buttonLsh
             // 
             this.buttonLsh.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.buttonLsh.Enabled = false;
             this.buttonLsh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow;
             this.buttonLsh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonLsh.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonLsh.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonLsh.Location = new System.Drawing.Point(51, 166);
             this.buttonLsh.Name = "buttonLsh";
             this.buttonLsh.Size = new System.Drawing.Size(35, 30);
@@ -905,9 +972,10 @@
             // buttonXor
             // 
             this.buttonXor.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.buttonXor.Enabled = false;
             this.buttonXor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow;
             this.buttonXor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonXor.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonXor.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonXor.Location = new System.Drawing.Point(51, 130);
             this.buttonXor.Name = "buttonXor";
             this.buttonXor.Size = new System.Drawing.Size(35, 30);
@@ -927,13 +995,15 @@
             this.buttonRor.TabIndex = 14;
             this.buttonRor.Text = "RoR";
             this.buttonRor.UseVisualStyleBackColor = false;
+            this.buttonRor.Click += new System.EventHandler(this.buttonRor_Click);
             // 
             // buttonPar1
             // 
             this.buttonPar1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.buttonPar1.Enabled = false;
             this.buttonPar1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow;
             this.buttonPar1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonPar1.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonPar1.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonPar1.Location = new System.Drawing.Point(51, 58);
             this.buttonPar1.Name = "buttonPar1";
             this.buttonPar1.Size = new System.Drawing.Size(35, 30);
@@ -944,9 +1014,10 @@
             // buttonMod
             // 
             this.buttonMod.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.buttonMod.Enabled = false;
             this.buttonMod.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow;
             this.buttonMod.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonMod.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonMod.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonMod.Location = new System.Drawing.Point(51, 22);
             this.buttonMod.Name = "buttonMod";
             this.buttonMod.Size = new System.Drawing.Size(35, 30);
@@ -957,9 +1028,10 @@
             // buttonF
             // 
             this.buttonF.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.buttonF.Enabled = false;
             this.buttonF.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow;
             this.buttonF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonF.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonF.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonF.Location = new System.Drawing.Point(9, 202);
             this.buttonF.Name = "buttonF";
             this.buttonF.Size = new System.Drawing.Size(35, 30);
@@ -970,9 +1042,10 @@
             // buttonE
             // 
             this.buttonE.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.buttonE.Enabled = false;
             this.buttonE.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow;
             this.buttonE.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonE.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonE.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonE.Location = new System.Drawing.Point(9, 166);
             this.buttonE.Name = "buttonE";
             this.buttonE.Size = new System.Drawing.Size(35, 30);
@@ -983,9 +1056,10 @@
             // buttonD
             // 
             this.buttonD.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.buttonD.Enabled = false;
             this.buttonD.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow;
             this.buttonD.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonD.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonD.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonD.Location = new System.Drawing.Point(9, 130);
             this.buttonD.Name = "buttonD";
             this.buttonD.Size = new System.Drawing.Size(35, 30);
@@ -996,9 +1070,10 @@
             // buttonC
             // 
             this.buttonC.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.buttonC.Enabled = false;
             this.buttonC.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow;
             this.buttonC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonC.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonC.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonC.Location = new System.Drawing.Point(9, 94);
             this.buttonC.Name = "buttonC";
             this.buttonC.Size = new System.Drawing.Size(35, 30);
@@ -1009,9 +1084,10 @@
             // buttonB
             // 
             this.buttonB.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.buttonB.Enabled = false;
             this.buttonB.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow;
             this.buttonB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonB.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonB.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonB.Location = new System.Drawing.Point(9, 58);
             this.buttonB.Name = "buttonB";
             this.buttonB.Size = new System.Drawing.Size(35, 30);
@@ -1022,9 +1098,10 @@
             // buttonA
             // 
             this.buttonA.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.buttonA.Enabled = false;
             this.buttonA.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow;
             this.buttonA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonA.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonA.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonA.Location = new System.Drawing.Point(9, 22);
             this.buttonA.Name = "buttonA";
             this.buttonA.Size = new System.Drawing.Size(35, 30);
@@ -1149,67 +1226,7 @@
             this.radioOct.UseVisualStyleBackColor = true;
             this.radioOct.CheckedChanged += new System.EventHandler(this.cambiarSistemaMetrico);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(5, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(15, 12);
-            this.label1.TabIndex = 30;
-            this.label1.Text = "63";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(229, 16);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(15, 12);
-            this.label2.TabIndex = 31;
-            this.label2.Text = "47";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(413, 16);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(15, 12);
-            this.label4.TabIndex = 32;
-            this.label4.Text = "32";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(5, 49);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(15, 12);
-            this.label5.TabIndex = 33;
-            this.label5.Text = "31";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(229, 49);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(15, 12);
-            this.label6.TabIndex = 34;
-            this.label6.Text = "15";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(419, 49);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(10, 12);
-            this.label7.TabIndex = 35;
-            this.label7.Text = "0";
-            // 
-            // Prueba
+            // Calculadora
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -1224,7 +1241,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MaximizeBox = false;
-            this.Name = "Prueba";
+            this.Name = "Calculadora";
             this.Text = "Calculadora";
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.pulsacionTeclado);
             this.menuStrip1.ResumeLayout(false);

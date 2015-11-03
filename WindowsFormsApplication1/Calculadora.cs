@@ -13,12 +13,12 @@ namespace Calculadora
     public partial class Calculadora : Form
     {
         #region Variables
-        int contadorCifras = 0, tick = 0, modo = 0;
+        int contadorCifras = 0, maxContadorCifras = 16, tick = 0, modo = 0;
         Double [] operandos = new Double[2] {0,0};
         Double resultado1 = 0, memoria = 0;
         char operacion;
-        String buffer = "";
-        bool primeraOperacion = true, encadenado = false, nuevoNumero = true, especial = false, operacionErronea = false, signoPulsado = false, coma = false;
+        String buffer = "0";
+        bool primeraOperacion = true, encadenado = false, nuevoNumero = false, especial = false, operacionErronea = false, signoPulsado = false, coma = false;
         #endregion
 
         public Calculadora()
@@ -31,6 +31,8 @@ namespace Calculadora
         #region Introducir datos / Operar
         private void introducirNumero(Double numero)
         {
+            if (radioBin.Checked && numero > 1)
+                return;
             signoPulsado = false;
             if(numero == 0d && tResultado.Text == "0")
                 return;
@@ -40,13 +42,16 @@ namespace Calculadora
                 nuevoNumero = false;
                 buffer = "";
             }
-            if (contadorCifras < 16)
+            if (contadorCifras < maxContadorCifras)
             {
                 if (tResultado.Text == "0")
                     tResultado.Text = "";
                 tResultado.Text += numero.ToString();
                 buffer += numero;
-                operandos[tick] = Double.Parse(buffer);
+                if(radioBin.Checked)
+                    operandos[tick] = Convert.ToInt64(buffer, 2);
+                else
+                    operandos[tick] = Double.Parse(buffer);
                 contadorCifras++;
             }
         }
@@ -93,11 +98,6 @@ namespace Calculadora
         }
         private void operar()
         {
-            if (radioBin.Checked)
-            {
-                operandos[0] = Convert.ToInt64(operandos[0].ToString(), 2);
-                operandos[1] = Convert.ToInt64(operandos[1].ToString(), 2);
-            }
             if (primeraOperacion == false)
             {
                 if (operacion == '+')
@@ -109,9 +109,7 @@ namespace Calculadora
                 else if (operacion == '/')
                     resultado1 = operandos[0] / operandos[1];
                 if (radioBin.Checked)
-                {
                     resultado1 = Double.Parse(Convert.ToString((long)resultado1, 2));
-                }
                 operandos[0] = resultado1;
             }
             tick = 1;
@@ -131,15 +129,16 @@ namespace Calculadora
                 char op = entrada[0];
                 if (op == '=' || entrada == "\r")
                     igual();
-                else if (entrada == "\b")
-                    borrarAnterior(null, null);
-                else if (op == '.' || op == ',')
+                else if (op == '←' || entrada == "\b")
+                    borrarAnterior();
+                else if ((op == '.' || op == ',') && modo == 0)
                 {
                     if (coma == true)
                         return;
                     coma = true;
+                    nuevoNumero = false;
                     buffer += ",";
-                    tResultado.Text += ",";
+                    tResultado.Text = buffer;
                 }
                 else if (op == '/' || op == '*' || op == '-' || op == '+')
                 {
@@ -182,10 +181,15 @@ namespace Calculadora
                 else
                     tResultado.Text = resultado1.ToString();
                 tHistorial.Clear();
+                if (modo == 2 && resultado1 >= 90000000000000000000d)
+                {
+                    tResultado.Text = "Número demasiado grande para representar en binario.";
+                    operandos[0] = 0;
+                }
                 encadenado = false;
                 operandos[1] = 0;
                 tick = 0;
-                buffer = "";
+                buffer = "0";
                 nuevoNumero = true;
                 especial = false;
             }
@@ -210,19 +214,19 @@ namespace Calculadora
                 calcularBinario();
             buttonigual.Focus();
         }
-        private void borrarAnterior(object sender, EventArgs e)
+        private void borrarAnterior()
         {
             if (operacionErronea == true)
                 return;
-            if(resultado1 != 0)
+            if (resultado1 != 0)
             {
                 buffer = resultado1.ToString();
             }
-            if (buffer.Length > 1)
+            if (buffer.Length > 2)
             {
                 try
                 {
-                    if(buffer[buffer.Length-1] == ',')
+                    if (buffer[buffer.Length - 1] == ',')
                         coma = false;
                     buffer = buffer.Substring(0, buffer.Length - 1);
                     tResultado.Text = tResultado.Text.Substring(0, tResultado.Text.Length - 1);
@@ -388,6 +392,7 @@ namespace Calculadora
 
         private void cambiarSistemaMetrico(object sender, EventArgs e)
         {
+            borrarTodo(null, null);
             if(radioHexa.Checked)
             {
                 button2.Enabled = true;
@@ -421,6 +426,7 @@ namespace Calculadora
                 buttonD.Enabled = false;
                 buttonE.Enabled = false;
                 buttonF.Enabled = false;
+                maxContadorCifras = 16;
             }
             else if(radioOct.Checked)
             {
@@ -455,66 +461,103 @@ namespace Calculadora
                 buttonD.Enabled = false;
                 buttonE.Enabled = false;
                 buttonF.Enabled = false;
+                maxContadorCifras = 64;
             }
         }
 
         private void calcularBinario()
         {
-            String qword = "", dword = "", word = "", byt = "", binario = "";
-            Double temporal = 0;
+            String word1 = "", word2 = "", word3 = "", word4 = "", binario = "";
+            Double temporal = operandos[tick];
 
             if (tResultado.Text != "")
             {
                 if (!radioBin.Checked)
-                {
-                    temporal = Double.Parse(tResultado.Text);
                     binario = Convert.ToString((long)temporal, 2);
-                }
                 else
-                {
                     binario = tResultado.Text;
-                }
                 if(binario.Length < 16)
+                    word4 = binario.Substring(0, binario.Length);
+                else if(binario.Length >= 16 && binario.Length < 32)
                 {
-                    byt = binario.Substring(0, binario.Length);
+                    word4 = binario.Substring(binario.Length - 16, 16);
+                    word3 = binario.Substring(0, binario.Length - 16);
                 }
-                else if(binario.Length > 16 && binario.Length < 32)
+                else if (binario.Length >= 32 && binario.Length < 48)
                 {
-                    byt = binario.Substring(binario.Length - 16, 16);
-                    word = binario.Substring(0, binario.Length - 16);
+                    word4 = binario.Substring(binario.Length - 16, 16);
+                    word3 = binario.Substring(binario.Length - 32, 16);
+                    word2 = binario.Substring(0, binario.Length - 32);
                 }
-                else if (binario.Length > 32 && binario.Length < 48)
+                else if (binario.Length >= 48 && binario.Length <= 64)
                 {
-                    byt = binario.Substring(binario.Length - 16, 16);
-                    word = binario.Substring(binario.Length - 32, 16);
-                    dword = binario.Substring(0, binario.Length - 32);
+                    word4 = binario.Substring(binario.Length - 16, 16);
+                    word3 = binario.Substring(binario.Length - 32, 16);
+                    word2 = binario.Substring(binario.Length - 48, 16);
+                    word1 = binario.Substring(0, binario.Length - 48);
                 }
-                else if (binario.Length > 48 && binario.Length <= 64)
-                {
-                    byt = binario.Substring(binario.Length - 16, 16);
-                    word = binario.Substring(binario.Length - 32, 16);
-                    dword = binario.Substring(binario.Length - 48, 16);
-                    qword = binario.Substring(0, binario.Length - 48);
-                }
-                byt = byt.PadLeft(16, '0');
-                word = word.PadLeft(16, '0');
-                dword = dword.PadLeft(16, '0');
-                qword = qword.PadLeft(16, '0');
+                word4 = word4.PadLeft(16, '0');
+                word3 = word3.PadLeft(16, '0');
+                word2 = word2.PadLeft(16, '0');
+                word1 = word1.PadLeft(16, '0');
                 for (int k = 1; k < 16;k++)
                 {
                     if (k % 4 == 0)
                     {
-                        byt = byt.Insert(16-k, "\t");
-                        word = word.Insert(16-k, "\t");
-                        dword = dword.Insert(16-k, "\t");
-                        qword = qword.Insert(16-k, "\t");
+                        word4 = word4.Insert(16-k, "\t");
+                        word3 = word3.Insert(16-k, "\t");
+                        word2 = word2.Insert(16-k, "\t");
+                        word1 = word1.Insert(16-k, "\t");
                     }
                 }
-                textBox4.Text = byt;
-                textBox3.Text = word;
-                textBox2.Text = dword;
-                textBox1.Text = qword;
+                textBox4.Text = word4;
+                textBox3.Text = word3;
+                textBox2.Text = word2;
+                textBox1.Text = word1;
             }
+        }
+        
+
+        private void buttonRol_Click(object sender, EventArgs e)
+        {
+            if (radioBin.Checked)
+            {
+                String temporal;
+                temporal = Convert.ToString((long)operandos[tick], 2);
+                if (temporal.Length >= 64)
+                    return;
+                temporal = temporal.PadRight(temporal.Length + 1, '0');
+                tResultado.Text = temporal;
+                operandos[tick] = Convert.ToInt64(temporal, 2);
+            }
+            else
+            {
+                long temporal = (long)operandos[tick] << 1;
+                operandos[tick] = Convert.ToDouble(temporal);
+                tResultado.Text = operandos[tick].ToString();
+            }
+            calcularBinario();
+            buttonigual.Focus();
+        }
+
+        private void buttonRor_Click(object sender, EventArgs e)
+        {
+            if (radioBin.Checked)
+            {
+                String temporal;
+                temporal = Convert.ToString((long)operandos[tick], 2);
+                temporal = temporal.Substring(0, temporal.Length-1);
+                tResultado.Text = temporal;
+                operandos[tick] = Convert.ToInt64(temporal, 2);
+            }
+            else
+            {
+                long temporal = (long)operandos[tick] >> 1;
+                operandos[tick] = Convert.ToDouble(temporal);
+                tResultado.Text = operandos[tick].ToString();
+            }
+            calcularBinario();
+            buttonigual.Focus();
         }
         #endregion
     }
